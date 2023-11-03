@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <form action="{{ url_for('submit_selection') }}" method="post">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for image in images %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='images/' ~ image.path) }}" alt="Image"
+                        class="card-img-top img-fluid">
+                    <div class="card-body text-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="image" value="{{ image.id }}"
+                                id="imageCheck{{ image.id }}">
+                            <label class="form-check-label" for="imageCheck{{ image.id }}">
+                                選択
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row mt-4">
+            <div class="col text-center">
+                <input type="submit" value="送信" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
